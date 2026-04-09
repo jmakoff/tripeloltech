@@ -5,6 +5,8 @@
 
 class MockDataService {
   constructor() {
+    this._initialized = false;
+
     // Initialize in-memory data stores
     this.users = new Map();
     this.wallets = new Map();
@@ -19,8 +21,26 @@ class MockDataService {
     this.ticketMessages = new Map();
     this.sessions = new Map();
     
-    // Initialize with sample data
-    this.initializeSampleData();
+    // Simulate async data-layer boot (e.g. DB connection + migration)
+    this._boot();
+  }
+
+  _boot() {
+    const BOOT_DELAY_MS = 5000;
+    setTimeout(() => {
+      this.initializeSampleData();
+    }, BOOT_DELAY_MS);
+  }
+
+  isReady() {
+    return this._initialized;
+  }
+
+  getStatus() {
+    if (!this._initialized) {
+      return { status: 'initializing' };
+    }
+    return { status: 'up' };
   }
 
   initializeSampleData() {
@@ -114,6 +134,8 @@ class MockDataService {
       tickets: 1,
       ticketMessages: 1,
     };
+
+    this._initialized = true;
   }
 
   // User operations
