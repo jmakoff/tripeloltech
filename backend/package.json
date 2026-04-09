@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node ./app.js"
+    "start": "node ./app.js",
+    "test": "jest --forceExit"
   },
   "dependencies": {
     "adm-zip": "^0.5.10",
@@ -54,5 +55,9 @@
     "xlsx": "^0.18.5",
     "xrpl": "^3.1.0"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "jest": "^30.3.0",
+    "supertest": "^7.2.2"
+  }
 }
